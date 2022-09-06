@@ -5,7 +5,6 @@ import * as controller from './controller';
 
 const router = Router();
 
-router.get('/', authenticationMiddleware, asyncRouteHandler(controller.crawlFithou));
-router.post('/send', authenticationMiddleware, asyncRouteHandler(controller.sendCrawlToSubscriber));
+router.get('/', authenticationMiddleware, asyncRouteHandler(controller.schoolSchedule));
 
 export default router;
