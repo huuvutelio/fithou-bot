@@ -40,7 +40,14 @@ const getSubjectsInHTML = (html: string): string => {
   for (let i = 1; i < subjects.length; i++) {
     const subject = subjects[i];
     const subjectCode = $(subject).find('td').eq(1).text().trim();
-    const subjectName = $(subject).find('td').eq(2).text().trim();
+    const subjectName = $(subject)
+      .find('td')
+      .eq(2)
+      .text()
+      .trim()
+      .split('\n')
+      .map((x) => x.trim())
+      .join('\n');
     const subjectTime = $(subject).find('td').eq(7).text().trim();
     result += `Mã lớp: ${subjectCode}
 Tên lớp: ${subjectName}
