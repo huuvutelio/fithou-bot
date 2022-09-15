@@ -183,6 +183,11 @@ const subCtmsSubject = async (id: string) => {
     return;
   }
 
+  sendMessage(id, {
+    text: `CTMS BOT: Chức năng này đang được bảo trì.`,
+  });
+  return;
+
   if (user.isSubscribedSubject) {
     sendMessage(id, {
       text: `CTMS BOT: Bạn đã đăng theo dõi tín rồi nha.`,

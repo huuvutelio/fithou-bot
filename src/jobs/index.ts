@@ -17,7 +17,7 @@ import { eveningSchedule, morningSchedule, noonSchedule } from './schoolSchedule
 
 const runjobs = () => {
   schedule.scheduleJob(rule, crawlFithouJob);
-  scheduler.addSimpleIntervalJob(crawlCtmsJob);
+  // scheduler.addSimpleIntervalJob(crawlCtmsJob);
 
   schedule.scheduleJob('00 00 7 * * 0-6', morningSchedule);
   schedule.scheduleJob('00 30 12 * * 0-6', noonSchedule);
