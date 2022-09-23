@@ -1,10 +1,5 @@
 import config from 'config';
 import schedule from 'node-schedule';
-import { ToadScheduler } from 'toad-scheduler';
-import job from './crawlCtmsSubject';
-import crawlCtmsJob from './crawlCtmsSubject';
-
-const scheduler = new ToadScheduler();
 
 const rule = new schedule.RecurrenceRule();
 // your timezone
@@ -19,8 +14,8 @@ const runjobs = () => {
   schedule.scheduleJob(rule, crawlFithouJob);
   // scheduler.addSimpleIntervalJob(crawlCtmsJob);
 
-  schedule.scheduleJob('00 00 7 * * 0-6', morningSchedule);
-  schedule.scheduleJob('00 30 12 * * 0-6', noonSchedule);
+  schedule.scheduleJob('00 45 6 * * 0-6', morningSchedule);
+  schedule.scheduleJob('00 00 12 * * 0-6', noonSchedule);
   schedule.scheduleJob('00 30 16 * * 0-6', eveningSchedule);
 
   // console.log(scheduler.getById(job.id).getStatus());
