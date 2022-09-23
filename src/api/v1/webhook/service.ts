@@ -11,6 +11,7 @@ import {
   removeCtmsAccount,
   sendQuickReplies,
 } from 'services/facebook';
+import { NOTI_IMAGE } from 'utils/constants';
 
 const handleWebhook = async (data: any) => {
   const messaging = data.entry[0].messaging;
@@ -32,15 +33,13 @@ const handleWebhook = async (data: any) => {
               content_type: 'text',
               title: 'Thêm CTMS',
               payload: 'ADD_CTMS_ACCOUNT',
-              image_url:
-                'https://res.cloudinary.com/domvksfsk/image/upload/v1662532148/images/4bd6f5ad30f28e2e68226c44d2b139.png',
+              image_url: NOTI_IMAGE.on,
             },
             {
               content_type: 'text',
               title: 'Xóa CTMS',
               payload: 'REMOVE_CTMS_ACCOUNT',
-              image_url:
-                'https://res.cloudinary.com/domvksfsk/image/upload/v1662532170/images/33c92f929c613a191e3cec3e08132f.png',
+              image_url: NOTI_IMAGE.off,
             },
           ]);
           return;
@@ -50,15 +49,13 @@ const handleWebhook = async (data: any) => {
               content_type: 'text',
               title: 'Bật thông báo',
               payload: 'ADD_FITHOU_CRAWL_SERVICE',
-              image_url:
-                'https://res.cloudinary.com/domvksfsk/image/upload/v1662533474/images/446924bc9ec95ec6abdb8e9ff5b62c.png',
+              image_url: NOTI_IMAGE.on,
             },
             {
               content_type: 'text',
               title: 'Tắt thông báo',
               payload: 'REMOVE_FITHOU_CRAWL_SERVICE',
-              image_url:
-                'https://res.cloudinary.com/domvksfsk/image/upload/v1662533503/images/087e19b08d558d0c8371bb4a80ec1a.png',
+              image_url: NOTI_IMAGE.off,
             },
           ]);
           return;
@@ -68,15 +65,13 @@ const handleWebhook = async (data: any) => {
               content_type: 'text',
               title: 'Bật theo dõi',
               payload: 'ADD_CTMS_CREDITS_SERVICE',
-              image_url:
-                'https://res.cloudinary.com/domvksfsk/image/upload/v1662533474/images/446924bc9ec95ec6abdb8e9ff5b62c.png',
+              image_url: NOTI_IMAGE.on,
             },
             {
               content_type: 'text',
               title: 'Tắt theo dõi',
               payload: 'REMOVE_CTMS_CREDITS_SERVICE',
-              image_url:
-                'https://res.cloudinary.com/domvksfsk/image/upload/v1662533503/images/087e19b08d558d0c8371bb4a80ec1a.png',
+              image_url: NOTI_IMAGE.off,
             },
           ]);
           return;
@@ -86,15 +81,13 @@ const handleWebhook = async (data: any) => {
               content_type: 'text',
               title: 'Bật thông báo',
               payload: 'ADD_CTMS_TIMETABLE_SERVICE',
-              image_url:
-                'https://res.cloudinary.com/domvksfsk/image/upload/v1662533474/images/446924bc9ec95ec6abdb8e9ff5b62c.png',
+              image_url: NOTI_IMAGE.on,
             },
             {
               content_type: 'text',
               title: 'Tắt thông báo',
               payload: 'REMOVE_CTMS_TIMETABLE_SERVICE',
-              image_url:
-                'https://res.cloudinary.com/domvksfsk/image/upload/v1662533503/images/087e19b08d558d0c8371bb4a80ec1a.png',
+              image_url: NOTI_IMAGE.off,
             },
           ]);
           return;

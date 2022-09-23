@@ -37,6 +37,11 @@ const todayformatted = () => {
   return date;
 };
 
+const NOTI_IMAGE = {
+  on: 'https://cdn-icons-png.flaticon.com/128/1827/1827312.png',
+  off: 'https://cdn-icons-png.flaticon.com/128/1827/1827310.png',
+};
+
 export {
   APP_CONSTANTS,
   DEFAULT_PAGING,
@@ -46,4 +51,5 @@ export {
   COLUMN_NAME_SCHEDULE,
   todayformatted,
   EXPIRED_CTMS,
+  NOTI_IMAGE,
 };
