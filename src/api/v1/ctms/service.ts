@@ -2,6 +2,7 @@ import { NextFunction, Request } from 'express';
 /* eslint-disable max-len */
 import { UserModel } from 'models';
 import * as ctmsService from 'services/ctms';
+import { logoutCtms } from 'services/ctms';
 import { sendMessage } from 'services/facebook';
 
 export const login = async (username: string, password: string, id: string) => {
@@ -27,6 +28,8 @@ export const login = async (username: string, password: string, id: string) => {
     sendMessage(id, {
       text: `CTMS BOT: Đăng nhập thành công! Bạn đã có thể  sử dụng các dịch vụ ctms bot cung cấp.`,
     });
+
+    logoutCtms(result.cookie);
   }
   return result;
 };
