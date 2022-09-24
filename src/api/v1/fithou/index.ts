@@ -7,5 +7,6 @@ const router = Router();
 
 router.get('/', authenticationMiddleware, asyncRouteHandler(controller.crawlFithou));
 router.post('/send', authenticationMiddleware, asyncRouteHandler(controller.sendCrawlToSubscriber));
+router.post('/send-noti', authenticationMiddleware, asyncRouteHandler(controller.sendNotiForUserOfFithou));
 
 export default router;

@@ -35,12 +35,16 @@ export const login = async (username: string, password: string, id: string) => {
 };
 
 export const sendNotiForUserOfCTMS = async (req: Request, next: NextFunction) => {
-  const { message } = req.body;
-  const users: any[] = await UserModel.find();
-  for (let i = 0; i < users.length; i++) {
-    await sendMessage(users[i].subscribedID, {
-      text: `${message}`,
-    });
+  try {
+    const { message } = req.body;
+    const users: any[] = await UserModel.find();
+    for (let i = 0; i < users.length; i++) {
+      await sendMessage(users[i].subscribedID, {
+        text: `${message}`,
+      });
+    }
+    return message;
+  } catch (error) {
+    next(error);
   }
-  return message;
 };
