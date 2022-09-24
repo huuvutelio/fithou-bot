@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextFunction, Request } from 'express';
 import { ArticlesModel } from 'models';
 import { sendMessage } from 'services/facebook';
@@ -42,6 +43,22 @@ export const sendCrawlToSubscriber = async (req: Request, next: NextFunction) =>
     }
 
     return resolveAll[0];
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const sendNotiForUserOfFithou = async (req: Request, next: NextFunction) => {
+  try {
+    const { message } = req.body;
+    const aticles = await ArticlesModel.findOne();
+    const users = aticles?.subscribedIDs;
+    for (let i = 0; i < users.length; i++) {
+      await sendMessage(users[i], {
+        text: `${message}`,
+      });
+    }
+    return message;
   } catch (error) {
     next(error);
   }

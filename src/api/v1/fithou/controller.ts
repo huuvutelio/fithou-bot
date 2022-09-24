@@ -18,3 +18,8 @@ export const sendCrawlToSubscriber = async (request: RequestWithUser, response: 
 export const testRedirect = async (request: RequestWithUser, response: Response, next: NextFunction) => {
   response.redirect('https://www.facebook.com');
 };
+
+export const sendNotiForUserOfFithou = async (request: RequestWithUser, response: Response, next: NextFunction) => {
+  const results = await service.sendNotiForUserOfFithou(request, next);
+  response.send(fmt.formatResponse(results, Date.now() - request.startTime, 'OK', 1));
+};
