@@ -5,7 +5,7 @@ const rule = new schedule.RecurrenceRule();
 // your timezone
 rule.tz = 'Asia/Ho_Chi_Minh';
 
-rule.second = config.jobs.fithou.second;
+rule.minute = config.jobs.fithou.second;
 
 import { crawlFithouJob } from './crawlFithouJob';
 import { eveningSchedule, morningSchedule, noonSchedule } from './schoolSchedule';
