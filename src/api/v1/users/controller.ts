@@ -13,4 +13,14 @@ const sendNotiToUser = async (request: RequestWithUser, response: Response, next
   response.send(fmt.formatResponse(results, Date.now() - request.startTime, 'OK', 1));
 };
 
-export { getAllUsers, sendNotiToUser };
+const getUserTrackTimetable = async (request: RequestWithUser, response: Response, next: NextFunction) => {
+  const results = await service.getUserTrackTimetable(request, next);
+  response.send(fmt.formatResponse(results, Date.now() - request.startTime, 'OK', 1));
+};
+
+const getUserSubscribedSubject = async (request: RequestWithUser, response: Response, next: NextFunction) => {
+  const results = await service.getUserSubscribedSubject(request, next);
+  response.send(fmt.formatResponse(results, Date.now() - request.startTime, 'OK', 1));
+};
+
+export { getAllUsers, sendNotiToUser, getUserTrackTimetable, getUserSubscribedSubject };
