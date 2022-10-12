@@ -23,3 +23,35 @@ export const sendNotiToUser = async (req: Request, next: NextFunction) => {
     next(error);
   }
 };
+
+export const getUserTrackTimetable = async (req: Request, next: NextFunction) => {
+  try {
+    const trackTimetable = UserModel.count({ isTrackTimetable: true });
+    const noTrackTimetable = UserModel.count({ isTrackTimetable: false });
+
+    const resolveAll = await Promise.all([trackTimetable, noTrackTimetable]);
+
+    return {
+      trackTimetable: resolveAll[0],
+      noTrackTimetable: resolveAll[1],
+    };
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getUserSubscribedSubject = async (req: Request, next: NextFunction) => {
+  try {
+    const subscribedSubject = UserModel.count({ isSubscribedSubject: true });
+    const noSubscribedSubject = UserModel.count({ isSubscribedSubject: false });
+
+    const resolveAll = await Promise.all([subscribedSubject, noSubscribedSubject]);
+
+    return {
+      subscribedSubject: resolveAll[0],
+      noSubscribedSubject: resolveAll[1],
+    };
+  } catch (error) {
+    next(error);
+  }
+};
