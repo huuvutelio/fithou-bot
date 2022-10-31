@@ -7,4 +7,5 @@ export default interface User extends Document {
   subjectHTML: string;
   isSubscribedSubject: boolean;
   isTrackTimetable: boolean;
+  isExamDay: boolean;
 }

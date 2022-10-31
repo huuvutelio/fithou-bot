@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import { chatScript } from 'services/chatScript';
 import {
   sendLoginCtmsButton,
   sendMessage,
@@ -24,7 +25,7 @@ const handleWebhook = async (data: any) => {
       switch (payload) {
         case 'GET_STARTED':
           await sendMessage(id, {
-            text: `Chào mừng bạn đến với Fithou BOT. Chúc bạn có một trải nghiệm zui zẻ :D`,
+            text: `Chào mừng bạn đến với Fithou BOT. Chúc bạn có một trải nghiệm zui zẻ :D. #help để biết thêm chi tiết!`,
           });
           return;
         case 'CTMS_SERVICE':
@@ -127,9 +128,7 @@ const handleWebhook = async (data: any) => {
             break;
         }
       } else {
-        sendMessage(id, {
-          text: `Bot ngu ngok quá, không hiểu gì hết :(`,
-        });
+        chatScript(id, message.text);
       }
     }
   }

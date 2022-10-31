@@ -14,4 +14,9 @@ const sendNotiForUserOfCTMS = async (request: RequestWithUser, response: Respons
   response.send(fmt.formatResponse(results, Date.now() - request.startTime, 'OK', 1));
 };
 
-export { login, sendNotiForUserOfCTMS };
+const sendNotiExamDay = async (request: RequestWithUser, response: Response, next: NextFunction) => {
+  const results = await service.sendNotiExamDay(request, next);
+  response.send(fmt.formatResponse(results, Date.now() - request.startTime, 'OK', 1));
+};
+
+export { login, sendNotiForUserOfCTMS, sendNotiExamDay };
