@@ -11,6 +11,7 @@ const UsersSchema = new Schema<User>(
     subjectHTML: { type: String, default: '' },
     isSubscribedSubject: { type: Boolean, default: false },
     isTrackTimetable: { type: Boolean, default: false },
+    isExamDay: { type: Boolean, default: false },
   },
   {
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
