@@ -1,8 +1,9 @@
 import { NextFunction, Request } from 'express';
-/* eslint-disable max-len */
+
 import { UserModel } from 'models';
 import * as ctmsService from 'services/ctms';
 import { logoutCtms } from 'services/ctms';
+import { ExamDay } from 'services/ctms/examDay';
 import { sendMessage } from 'services/facebook';
 
 export const login = async (username: string, password: string, id: string) => {
@@ -44,6 +45,17 @@ export const sendNotiForUserOfCTMS = async (req: Request, next: NextFunction) =>
       });
     }
     return message;
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const sendNotiExamDay = async (req: Request, next: NextFunction) => {
+  try {
+    const { username, password } = req.body;
+
+    const result = await ExamDay(username, password);
+    return result;
   } catch (error) {
     next(error);
   }

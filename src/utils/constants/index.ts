@@ -22,6 +22,7 @@ const enum CRAWL_FITHOU_TYPE {
 }
 
 const SCHOOL_SCHEDULE_URL = 'http://ctms.fithou.net.vn/Lichhoc.aspx?sid=';
+const EXAM_DAY_URL = 'http://ctms.fithou.net.vn/Lichthi.aspx?sid=';
 
 const COLUMN_NAME_SCHEDULE = ['STT', 'Giờ', 'Phòng', 'Môn học', 'Giảng viên', 'Lớp', 'Trạng thái'];
 
@@ -35,6 +36,16 @@ const todayformatted = () => {
 
   const date: string = dd + '/' + mm + '/' + yyyy;
   return date;
+};
+
+const convertDate = (date: string) => {
+  const dateArr = date.split('/');
+  const dd = String(dateArr[0]).padStart(2, '0');
+  const mm = String(dateArr[1]).padStart(2, '0'); //January is 0!
+  const yyyy = dateArr[2];
+
+  const dateFormatted: string = mm + '/' + dd + '/' + yyyy;
+  return dateFormatted;
 };
 
 const NOTI_IMAGE = {
@@ -52,4 +63,6 @@ export {
   todayformatted,
   EXPIRED_CTMS,
   NOTI_IMAGE,
+  EXAM_DAY_URL,
+  convertDate,
 };

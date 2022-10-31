@@ -315,6 +315,64 @@ const sendQuickReplies = async (id: string, text: string, quick_replies: QUICK_R
   }
 };
 
+const examDay = async (receiver: string) => {
+  try {
+    const updateDoc = {
+      $set: {
+        isExamDay: true,
+      },
+    };
+    const user = await UserModel.findOneAndUpdate({ subscribedID: receiver }, updateDoc);
+    if (user?.isExamDay) {
+      await sendMessage(receiver, {
+        text: `Bạn đã bật chức năng thông báo lịch thi rồi nha.`,
+      });
+      return;
+    }
+
+    if (user) {
+      sendMessage(receiver, {
+        text: `🔔 Bật chức năng thông báo lịch thi thành công!`,
+      });
+    } else {
+      sendMessage(receiver, {
+        text: `❗️ Bạn chưa thêm tài khoản CTMS vào hệ thống.`,
+      });
+    }
+  } catch (error) {
+    logger.error(`[ExamDay] ${error}`);
+  }
+};
+
+const unExamDay = async (receiver: string) => {
+  try {
+    const updateDoc = {
+      $set: {
+        isExamDay: false,
+      },
+    };
+    const user = await UserModel.findOneAndUpdate({ subscribedID: receiver }, updateDoc);
+    if (user?.isExamDay) {
+      await sendMessage(receiver, {
+        text: `Bạn đã tắt chức năng thông báo lịch thi rồi nha.`,
+      });
+      return;
+    }
+
+    if (user) {
+      sendMessage(receiver, {
+        text: `🔔 Tắt chức năng thông báo lịch thi thành công!`,
+      });
+    } else {
+      sendMessage(receiver, {
+        text: `❗️ Bạn chưa thêm tài khoản CTMS vào hệ thống.`,
+      });
+    }
+  } catch (error) {
+    logger.error(`[ExamDay] ${error}`);
+  }
+};
+
 export {
   sendMessage,
   sendLoginCtmsButton,
@@ -327,4 +385,6 @@ export {
   subCtmsSubject,
   removeCtmsAccount,
   sendQuickReplies,
+  examDay,
+  unExamDay,
 };
