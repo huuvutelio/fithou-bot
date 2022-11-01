@@ -18,7 +18,7 @@ const runjobs = () => {
   schedule.scheduleJob('00 00 12 * * 0-6', noonSchedule);
   schedule.scheduleJob('00 30 16 * * 0-6', eveningSchedule);
 
-  schedule.scheduleJob('00 00 09 * * 0-6', examDaySchedule);
+  schedule.scheduleJob('00 00 20 * * 0-6', examDaySchedule);
 };
 
 export default runjobs;
