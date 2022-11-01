@@ -23,7 +23,7 @@ export const examDaySchedule = async () => {
     for (const user of users) {
       const examDayResponse: ExamDayResponse = await ExamDay(user.username, user.password);
 
-      if (examDayResponse.isExpired) {
+      if (examDayResponse?.isExpired) {
         await sendMessage(user?.subscribedID, {
           text: 'Tài khoản CTMS của bạn đã hết hạn, vui lòng gửi mail theo hướng dẫn để dùng tiếp dịch vụ nha!🥲',
         });
@@ -40,7 +40,7 @@ export const examDaySchedule = async () => {
           });
         }
 
-        return 'Done';
+        continue;
       }
 
       for (let i = 0; i < examDayResponse?.data?.length; i++) {
