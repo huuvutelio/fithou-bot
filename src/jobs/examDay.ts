@@ -5,7 +5,7 @@ import { ExamDay } from 'services/ctms/examDay';
 import User from 'models/types/User';
 import { ExamDayResponse, ExamType } from 'types';
 import ExamDayModel from 'models/schemas/ExamDay';
-import { convertDate } from 'utils/constants';
+import { calculateTheNumberOfDaysBetweenTwoDates, convertDate } from 'utils/constants';
 
 const message = (text: string, examDay: ExamType) => {
   return `${text}:
@@ -20,6 +20,8 @@ Mã DS thi: ${examDay?.CodeOfExamList}`;
 export const examDaySchedule = async () => {
   try {
     const users: User[] = await UserModel.find({ isExamDay: true });
+    const today = new Date();
+
     for (const user of users) {
       const examDayResponse: ExamDayResponse = await ExamDay(user.username, user.password);
 
@@ -29,7 +31,6 @@ export const examDaySchedule = async () => {
         });
       }
 
-      const today = new Date().getDate();
       const examDayData = await ExamDayModel.findOne({ username: user.username });
 
       if (!examDayData) {
@@ -75,9 +76,11 @@ export const examDaySchedule = async () => {
           });
         }
 
-        const dateOfExam = new Date(convertDate(examDayResponse?.data[i]?.ExamTime.split(' ')[1])).getDate();
+        const dateOfExam = new Date(convertDate(examDayResponse?.data[i]?.ExamTime.split(' ')[1]));
 
-        if (dateOfExam - today === 1) {
+        const numberOfDate = calculateTheNumberOfDaysBetweenTwoDates(dateOfExam, today);
+
+        if (numberOfDate === 1) {
           await sendMessage(user?.subscribedID, {
             text: message('Bạn có lịch thi ngày mai 😝', examDayResponse?.data[i]),
           });
