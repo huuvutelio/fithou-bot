@@ -53,6 +53,12 @@ const NOTI_IMAGE = {
   off: 'https://cdn-icons-png.flaticon.com/128/1827/1827310.png',
 };
 
+const calculateTheNumberOfDaysBetweenTwoDates = (nextDate: Date, prevDate: Date) => {
+  const diffTime = Math.abs(nextDate.getTime() - prevDate.getTime());
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays;
+};
+
 export {
   APP_CONSTANTS,
   DEFAULT_PAGING,
@@ -65,4 +71,5 @@ export {
   NOTI_IMAGE,
   EXAM_DAY_URL,
   convertDate,
+  calculateTheNumberOfDaysBetweenTwoDates,
 };
