@@ -29,6 +29,7 @@ export const examDaySchedule = async () => {
         await sendMessage(user?.subscribedID, {
           text: 'Tài khoản CTMS của bạn đã hết hạn, vui lòng gửi mail theo hướng dẫn để dùng tiếp dịch vụ nha!🥲',
         });
+        logger.warn(`User ${user.username} is expired! ${new Date()}`);
       }
 
       const examDayData = await ExamDayModel.findOne({ username: user.username });
@@ -39,6 +40,7 @@ export const examDaySchedule = async () => {
           await sendMessage(user?.subscribedID, {
             text: message('Bạn có lịch thi 🥰', examDayResponse?.data[i]),
           });
+          logger.warn(`User ${user.username} has a exam! ${new Date()}`);
         }
 
         continue;
@@ -52,6 +54,7 @@ export const examDaySchedule = async () => {
           await sendMessage(user?.subscribedID, {
             text: message('Bạn có lịch thi 🥰', examDayResponse?.data[i]),
           });
+          logger.warn(`User ${user.username} has a exam! ${new Date()}`);
         }
 
         const hasChanged = examDayData.dataSent.find(
@@ -63,6 +66,8 @@ export const examDaySchedule = async () => {
           await sendMessage(user?.subscribedID, {
             text: message('Lịch thi của bạn đã thay đổi 😎', examDayResponse?.data[i]),
           });
+
+          logger.warn(`User ${user.username} exam has been changed! ${new Date()}`);
         }
 
         const hasChangedRoom = examDayData.dataSent.find(
@@ -74,6 +79,8 @@ export const examDaySchedule = async () => {
           await sendMessage(user?.subscribedID, {
             text: message('Phòng thi của bạn đã thay đổi 😜', examDayResponse?.data[i]),
           });
+
+          logger.warn(`User ${user.username} exam room has been changed! ${new Date()}`);
         }
 
         const dateOfExam = new Date(convertDate(examDayResponse?.data[i]?.ExamTime.split(' ')[1]));
@@ -84,6 +91,8 @@ export const examDaySchedule = async () => {
           await sendMessage(user?.subscribedID, {
             text: message('Bạn có lịch thi ngày mai 😝', examDayResponse?.data[i]),
           });
+
+          logger.warn(`User ${user.username} exam tomorrow ${new Date()}`);
         }
       }
     }
