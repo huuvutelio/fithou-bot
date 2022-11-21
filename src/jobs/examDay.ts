@@ -67,7 +67,7 @@ export const examDaySchedule = async () => {
             text: message('Lịch thi của bạn đã thay đổi 😎', examDayResponse?.data[i]),
           });
 
-          await ExamDayModel.updateOne({ username: user.username, dataSent: examDayResponse?.data });
+          await ExamDayModel.updateOne({ username: user.username }, { $set: { dataSent: examDayResponse?.data } });
 
           logger.warn(`User ${user.username} exam has been changed! ${new Date()}`);
         }
@@ -82,7 +82,7 @@ export const examDaySchedule = async () => {
             text: message('Phòng thi của bạn đã thay đổi 😜', examDayResponse?.data[i]),
           });
 
-          await ExamDayModel.updateOne({ username: user.username, dataSent: examDayResponse?.data });
+          await ExamDayModel.updateOne({ username: user.username }, { $set: { dataSent: examDayResponse?.data } });
 
           logger.warn(`User ${user.username} exam room has been changed! ${new Date()}`);
         }
