@@ -25,7 +25,7 @@ const handleWebhook = async (data: any) => {
       switch (payload) {
         case 'GET_STARTED':
           await sendMessage(id, {
-            text: `Chào mừng bạn đến với Fithou BOT. Chúc bạn có một trải nghiệm zui zẻ :D. #help để biết thêm chi tiết!`,
+            text: `Chào mừng bạn đến với Fithou BOT. Chúc bạn có một trải nghiệm zui zẻ :D. /help để biết thêm chi tiết!`,
           });
           return;
         case 'CTMS_SERVICE':
