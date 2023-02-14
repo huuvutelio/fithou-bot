@@ -13,10 +13,10 @@ const loginCtms = async (username: string, password: string) => {
         ctl00$LeftCol$UserLogin1$txtUsername: username,
         ctl00$LeftCol$UserLogin1$txtPassword: md5(password),
         ctl00$LeftCol$UserLogin1$btnLogin: 'Đăng nhập',
-        __VIEWSTATE: '/wEPDwUKLTMxMTI3NzE2NmRkuxaF3c67KGjoOFqX0sG+fcLVMEZuh3pODFEDu//PQek=',
+        __VIEWSTATE: '/wEPDwUJNjgxODI3MDEzZGQYhImpueCRmFchkTJkEoLggX4C6Nz/NXMIzR9/49O/0g==',
         __VIEWSTATEGENERATOR: 'C2EE9ABB',
         __EVENTVALIDATION:
-          '/wEdAARDK5nAotnhAa2V8pYjhGuPMVDm8KVzqxEfMx7263Qx5VsdkPb56sD60m4bRwV1zT7o396vFnxqy4G+sdDoX0RYUFkugKnBmjKMY74KIZl647vBY5E+Aii9xap1CDBHbI4=',
+          '/wEdAAQxNFjzuCTBmG4Ry6gmDFTXMVDm8KVzqxEfMx7263Qx5VsdkPb56sD60m4bRwV1zT7o396vFnxqy4G+sdDoX0RYcT0vDsg4dG9gkFX2SUYDeTjkkBvsNMeyzTehazPIVNk=',
       }),
       {
         headers: {
@@ -32,6 +32,8 @@ const loginCtms = async (username: string, password: string) => {
       errorMsg: dom.text(),
     };
   } catch (err) {
+    console.log(err);
+    
     return {
       cookie: [],
       isSuccess: false,
@@ -45,7 +47,7 @@ const logoutCtms = async (cookie: Array<string>) => {
     await axios.post(
       `${config.service.ctms}/login.aspx`,
       qs.stringify({
-        __VIEWSTATE: '/wEPDwUKLTMxMTI3NzE2NmRkuxaF3c67KGjoOFqX0sG+fcLVMEZuh3pODFEDu//PQek=',
+        __VIEWSTATE: '/wEPDwUJNjgxODI3MDEzZGQYhImpueCRmFchkTJkEoLggX4C6Nz/NXMIzR9/49O/0g==',
         __VIEWSTATEGENERATOR: 'C2EE9ABB',
         __CALLBACKID: 'ctl00$QuanlyMenu1',
         __CALLBACKPARAM: 'logout',
