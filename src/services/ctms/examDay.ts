@@ -5,6 +5,7 @@ import logger from 'logger';
 import { EXAM_DAY_URL, EXPIRED_CTMS } from 'utils/constants';
 import { loginCtms, logoutCtms } from 'services/ctms/auth';
 import { ExamDayResponse, ExamType } from 'types';
+import { removeCtmsUserByEmail } from 'api/v1/users/service';
 
 export const ExamDay = async (username: string, password: string, id?: string) => {
   try {
@@ -58,6 +59,13 @@ export const ExamDay = async (username: string, password: string, id?: string) =
       };
 
       return res;
+    }
+
+    if (login.isRemove) {
+      await removeCtmsUserByEmail(
+        username,
+        'Tài khoản CTMS của bạn đã bị đổi mật khẩu, vui lòng đăng nhập lại để sử dụng dịch vụ nha!🥲'
+      );
     }
   } catch (error) {
     logger.error(`[ExamDay] ${error}`);

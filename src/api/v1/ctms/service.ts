@@ -5,6 +5,7 @@ import * as ctmsService from 'services/ctms';
 import { logoutCtms } from 'services/ctms';
 import { ExamDay } from 'services/ctms/examDay';
 import { sendMessage } from 'services/facebook';
+import { removeCtmsUserByEmail } from '../users/service';
 
 export const login = async (username: string, password: string, id: string) => {
   const result = await ctmsService.loginCtms(username, password);
@@ -32,6 +33,14 @@ export const login = async (username: string, password: string, id: string) => {
 
     logoutCtms(result.cookie);
   }
+
+  if (result.isRemove) {
+    await removeCtmsUserByEmail(
+      username,
+      'Tài khoản CTMS của bạn đã bị đổi mật khẩu, vui lòng đăng nhập lại để sử dụng dịch vụ nha!🥲'
+    );
+  }
+
   return result;
 };
 

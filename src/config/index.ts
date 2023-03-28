@@ -1,9 +1,10 @@
 import dotenvSafe from 'dotenv-safe';
+import * as dotenv from 'dotenv'; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 import path from 'path';
 import fs from 'fs';
 
+dotenv.config();
 const pathEnv = path.join(__dirname, `../../.env.${process.env.NODE_ENV || 'dev'}`);
-
 if (fs.existsSync(pathEnv)) {
   dotenvSafe.config({
     allowEmptyValues: true,
@@ -11,6 +12,7 @@ if (fs.existsSync(pathEnv)) {
     sample: path.join(__dirname, '../../.env.example'),
   });
 }
+
 export default {
   env: process.env.NODE_ENV,
   port: process.env.PORT || 3000,

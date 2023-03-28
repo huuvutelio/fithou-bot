@@ -18,7 +18,7 @@ const UsersSchema = new Schema<User>(
   }
 );
 
-UsersSchema.index({ aid: 1 });
+UsersSchema.index({ subscribedID: 1, username: 1 });
 
 const UsersModel: Model<User> = model<User>(MODELS.users, UsersSchema, MODELS.users);
 export default UsersModel;

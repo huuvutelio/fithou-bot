@@ -5,6 +5,6 @@ import * as controller from './controller';
 
 const router = Router();
 
-router.get('/', authenticationMiddleware, asyncRouteHandler(controller.schoolSchedule));
+router.post('/', authenticationMiddleware, asyncRouteHandler(controller.schoolSchedule));
 
 export default router;

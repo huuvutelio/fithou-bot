@@ -1,15 +1,7 @@
 /* eslint-disable max-len */
 import logger from 'logger';
 import { ArticlesModel, UserModel } from 'models';
-import {
-  convertHtmlToImage,
-  deleteImage,
-  getSubjects,
-  getSubjectsInHTML,
-  getUserID,
-  loginCtms,
-  logoutCtms,
-} from 'services/ctms';
+import { convertHtmlToImage, deleteImage, getSubjects, getSubjectsInHTML, getUserID, logoutCtms } from 'services/ctms';
 import config from '../../config';
 import { QUICK_REPLIES_TYPE } from './type';
 const { default: axios } = require('axios');
@@ -187,26 +179,6 @@ const subCtmsSubject = async (id: string) => {
     text: `CTMS BOT: Chức năng này đang được bảo trì.`,
   });
   return;
-
-  if (user.isSubscribedSubject) {
-    sendMessage(id, {
-      text: `CTMS BOT: Bạn đã đăng theo dõi tín rồi nha.`,
-    });
-    return;
-  }
-
-  await UserModel.updateOne({ subscribedID: id }, { isSubscribedSubject: true });
-
-  await sendMessage(id, {
-    text: `Bot đã lập lịch theo dõi tín chỉ cho bạn. Lưu ý, bạn nên tắt tính năng này khi k cần dùng đến nha :D`,
-  });
-  const data = await loginCtms(user.username, user.password);
-  if (data.isSuccess) {
-    await sendMessage(id, {
-      text: `Dưới đây là các môn bạn hiện tại bạn có thể đăng ký. \nBot sẽ gửi thông báo cho bạn khi có thay đổi.`,
-    });
-    await sendSubjectCtms(id, data.cookie, user.username);
-  }
 };
 
 const unsubCtmsSubject = async (id: string) => {

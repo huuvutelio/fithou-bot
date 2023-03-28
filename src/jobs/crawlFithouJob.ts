@@ -18,17 +18,17 @@ export const crawlFithouJob = async () => {
   }
 
   if (resolveAll[0]?.type === CRAWL_FITHOU_TYPE.oneRecord || resolveAll[0]?.type === CRAWL_FITHOU_TYPE.new) {
-    for (let i = 0; i < subscribers.length; i++) {
-      sendMessage(subscribers[i], {
+    for (const element of subscribers) {
+      sendMessage(element, {
         text: `${resolveAll[0]?.data?.title} \n ${resolveAll[0]?.data?.link}`,
       });
     }
   }
 
   if (resolveAll[0]?.type === CRAWL_FITHOU_TYPE.manyRecords) {
-    for (let i = 0; i < subscribers.length; i++) {
+    for (const element of subscribers) {
       for (let j = 0; j < resolveAll[0]?.data?.length; j++) {
-        sendMessage(subscribers[i], {
+        sendMessage(element, {
           text: `${resolveAll[0]?.data[j]?.title} \n ${resolveAll[0]?.data[j]?.link}`,
         });
       }

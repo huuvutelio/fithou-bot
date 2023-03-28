@@ -4,6 +4,7 @@ import * as cheerio from 'cheerio';
 import { loginCtms, logoutCtms } from 'services/ctms';
 import { EXPIRED_CTMS, SCHOOL_SCHEDULE_URL, todayformatted } from 'utils/constants';
 import logger from 'logger';
+import { removeCtmsUserByEmail } from 'api/v1/users/service';
 
 const checkSession = (session: string) => {
   if (session.match('07:30')) {
@@ -177,6 +178,13 @@ export const schoolScheduleService = async (username: string, password: string) 
       logoutCtms(login.cookie);
 
       return list;
+    }
+
+    if (login.isRemove) {
+      await removeCtmsUserByEmail(
+        username,
+        'Tài khoản CTMS của bạn đã bị đổi mật khẩu, vui lòng đăng nhập lại để sử dụng dịch vụ nha!🥲'
+      );
     }
 
     return login;

@@ -1,4 +1,5 @@
 import { NextFunction, Request } from 'express';
+import logger from 'logger';
 import { UserModel } from 'models';
 import { sendMessage } from 'services/facebook';
 
@@ -53,5 +54,23 @@ export const getUserSubscribedSubject = async (req: Request, next: NextFunction)
     };
   } catch (error) {
     next(error);
+  }
+};
+
+export const removeCtmsUserByEmail = async (email: string, reason: string) => {
+  try {
+    const user = await UserModel.findOne({ username: email });
+    if (user) {
+      await UserModel.deleteOne({ username: email });
+      sendMessage(user.subscribedID, {
+        text: `CTMS BOT: ${reason}`,
+      });
+    } else {
+      sendMessage(user.subscribedID, {
+        text: `CTMS BOT: ${reason}`,
+      });
+    }
+  } catch (error) {
+    logger.error(`[removeCtmsUser] ${error}`);
   }
 };
