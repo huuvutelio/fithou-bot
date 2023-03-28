@@ -4,6 +4,7 @@ import config from 'config';
 import md5 from 'md5';
 import qs from 'qs';
 import cheerio from 'cheerio';
+import logger from 'logger';
 
 interface LoginCtmsResponse {
   cookie: any;
@@ -67,7 +68,7 @@ const logoutCtms = async (cookie: Array<string>) => {
     await axios.post(
       `${config.service.ctms}/login.aspx`,
       qs.stringify({
-        __VIEWSTATE: '/wEPDwUKLTMxMTI3NzE2NmRkuxaF3c67KGjoOFqX0sG+fcLVMEZuh3pODFEDu//PQek=',
+        __VIEWSTATE: '/wEPDwUJNjgxODI3MDEzZGQYhImpueCRmFchkTJkEoLggX4C6Nz/NXMIzR9/49O/0g==',
         __VIEWSTATEGENERATOR: 'C2EE9ABB',
         __CALLBACKID: 'ctl00$QuanlyMenu1',
         __CALLBACKPARAM: 'logout',
@@ -79,6 +80,8 @@ const logoutCtms = async (cookie: Array<string>) => {
         },
       }
     );
+
+    logger.info('logout ctms success');
   } catch (e) {
     console.log('logout errr:', e.message);
   }

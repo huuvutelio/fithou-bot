@@ -1,10 +1,13 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import axios from 'axios';
 import * as cheerio from 'cheerio';
+import qs from 'qs';
 
 import { loginCtms, logoutCtms } from 'services/ctms';
 import { EXPIRED_CTMS, SCHOOL_SCHEDULE_URL, todayformatted } from 'utils/constants';
 import logger from 'logger';
 import { removeCtmsUserByEmail } from 'api/v1/users/service';
+import { formatDateTimeToGetTimetable } from 'utils';
 
 const checkSession = (session: string) => {
   if (session.match('07:30')) {
@@ -27,11 +30,28 @@ export const schoolScheduleService = async (username: string, password: string) 
     const cookie = login.cookie.join('; ');
 
     if (login.isSuccess) {
-      const dom = await axios.get(SCHOOL_SCHEDULE_URL, {
-        headers: {
-          Cookie: cookie,
-        },
+      const date = formatDateTimeToGetTimetable();
+      console.log('date', date);
+
+      const data = qs.stringify({
+        ctl00$LeftCol$Lichhoc1$txtNgaydautuan: date,
+        ctl00$LeftCol$Lichhoc1$btnXemlich: 'Xem+lịch',
       });
+      const configAxios = {
+        method: 'post',
+        url: SCHOOL_SCHEDULE_URL,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Cookie: cookie,
+          Origin: 'http://ctms.fithou.net.vn',
+          Referer: SCHOOL_SCHEDULE_URL,
+          'Upgrade-Insecure-Requests': '1',
+          'User-Agent':
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36',
+        },
+        data: data,
+      };
+      const dom = await axios(configAxios);
 
       const $ = cheerio.load(dom.data);
 
