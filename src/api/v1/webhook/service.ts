@@ -13,11 +13,12 @@ import {
   sendQuickReplies,
 } from 'services/facebook';
 import { NOTI_IMAGE } from 'utils/constants';
+import { helpscript } from 'utils/helpscript';
 
 const handleWebhook = async (data: any) => {
   const messaging = data.entry[0].messaging;
-  for (let i = 0; i < messaging.length; i++) {
-    const { sender, postback, message } = messaging[i];
+  for (const element of messaging) {
+    const { sender, postback, message } = element;
 
     const { id } = sender;
     if (postback) {
@@ -26,6 +27,11 @@ const handleWebhook = async (data: any) => {
         case 'GET_STARTED':
           await sendMessage(id, {
             text: `Chào mừng bạn đến với Fithou BOT. Chúc bạn có một trải nghiệm zui zẻ :D. /help để biết thêm chi tiết!`,
+          });
+          return;
+        case 'HELP':
+          await sendMessage(id, {
+            text: helpscript(),
           });
           return;
         case 'CTMS_SERVICE':

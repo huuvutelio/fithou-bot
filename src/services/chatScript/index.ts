@@ -1,5 +1,5 @@
 import { examDay, removeCtmsAccount, sendLoginCtmsButton, sendMessage, unExamDay } from 'services/facebook';
-import { help } from 'services/help';
+import { helpscript } from 'utils/helpscript';
 import { define } from './define';
 
 export const chatScript = async (id: string, message: string) => {
@@ -12,7 +12,7 @@ export const chatScript = async (id: string, message: string) => {
       return;
     case define.help:
       sendMessage(id, {
-        text: help(),
+        text: helpscript(),
       });
       return;
     case define.examday:

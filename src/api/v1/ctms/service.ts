@@ -48,8 +48,8 @@ export const sendNotiForUserOfCTMS = async (req: Request, next: NextFunction) =>
   try {
     const { message } = req.body;
     const users: any[] = await UserModel.find();
-    for (let i = 0; i < users.length; i++) {
-      await sendMessage(users[i].subscribedID, {
+    for (const element of users) {
+      await sendMessage(element.subscribedID, {
         text: `${message}`,
       });
     }

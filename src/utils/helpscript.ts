@@ -1,4 +1,4 @@
-export const help = () => {
+export const helpscript = () => {
   return `*Các lệnh hỗ trợ:*
 /login: Đăng nhập CTMS
 /logout: Đăng xuất CTMS

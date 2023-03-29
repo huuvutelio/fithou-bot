@@ -25,17 +25,17 @@ export const sendCrawlToSubscriber = async (req: Request, next: NextFunction) =>
     const subscribers = resolveAll[1] && resolveAll[1].toObject().subscribedIDs;
 
     if (resolveAll[0]?.type === CRAWL_FITHOU_TYPE.oneRecord || resolveAll[0]?.type === CRAWL_FITHOU_TYPE.new) {
-      for (let i = 0; i < subscribers.length; i++) {
-        sendMessage(subscribers[i], {
+      for (const element of subscribers) {
+        sendMessage(element, {
           text: `${resolveAll[0]?.data?.title} \n ${resolveAll[0]?.data?.link}`,
         });
       }
     }
 
     if (resolveAll[0]?.type === CRAWL_FITHOU_TYPE.manyRecords) {
-      for (let i = 0; i < subscribers.length; i++) {
+      for (const element of subscribers) {
         for (let j = 0; j < resolveAll[0]?.data?.length; j++) {
-          sendMessage(subscribers[i], {
+          sendMessage(element, {
             text: `${resolveAll[0]?.data[j]?.title} \n ${resolveAll[0]?.data[j]?.link}`,
           });
         }
@@ -53,8 +53,8 @@ export const sendNotiForUserOfFithou = async (req: Request, next: NextFunction) 
     const { message } = req.body;
     const aticles = await ArticlesModel.findOne();
     const users = aticles?.subscribedIDs;
-    for (let i = 0; i < users.length; i++) {
-      await sendMessage(users[i], {
+    for (const element of users) {
+      await sendMessage(element, {
         text: `${message}`,
       });
     }

@@ -6,12 +6,12 @@ import qs from 'qs';
 import cheerio from 'cheerio';
 import logger from 'logger';
 
-interface LoginCtmsResponse {
+type LoginCtmsResponse = {
   cookie: any;
   isSuccess: boolean;
   isRemove: boolean;
   errorMsg: string;
-}
+};
 
 const loginCtms = async (username: string, password: string) => {
   try {
