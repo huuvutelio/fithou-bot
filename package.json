@@ -3,13 +3,17 @@
   "version": "0.0.1",
   "description": "Fithou bot",
   "main": "index.js",
+  "engines": {
+    "node": "16.x",
+    "npm": "8.x"
+  },
   "scripts": {
     "copy-env-files": "copyfiles ./.env.* dist/",
-    "build": "rm -rf ./dist && tsc && npx tsc-alias",
+    "build": "rm -rf ./dist && ./node_modules/.bin/tsc",
     "lint": "./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx",
     "lint-fix": "./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "prepare": "npx husky install",
-    "start": "NODE_PATH=./src nodemon src/server.ts",
+    "start": "cross-env NODE_PATH=./dist NODE_ENV=prd node dist/server.js",
     "start-ts": "NODE_PATH=./src nodemon src/server.ts",
     "start-dev": "NODE_ENV=dev npm run start",
     "start-stg": "NODE_ENV=stg npm run start",
@@ -47,6 +51,7 @@
     "puppeteer": "^17.1.0"
   },
   "dependencies": {
+    "cross-env": "^7.0.3",
     "axios": "^0.27.2",
     "body-parser": "^1.20.0",
     "cheerio": "^1.0.0-rc.12",

@@ -1,4 +1,5 @@
 import config from 'config';
+import logger from 'logger';
 import schedule from 'node-schedule';
 
 const rule = new schedule.RecurrenceRule();
@@ -12,6 +13,7 @@ import { examDaySchedule } from './examDay';
 import { eveningSchedule, morningSchedule, noonSchedule } from './schoolSchedule';
 
 const runjobs = () => {
+  logger.info('All jobs are running');
   schedule.scheduleJob(rule, crawlFithouJob);
 
   schedule.scheduleJob('00 45 6 * * 0-6', morningSchedule);

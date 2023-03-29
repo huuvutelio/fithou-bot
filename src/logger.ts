@@ -14,7 +14,7 @@ const prodFormat = () => {
 
   const replacer = (key: string, value: any) => (value instanceof Error ? replaceError(value) : value);
 
-  return combine(format.json({ replacer }));
+  return combine(format.timestamp(), format.json({ replacer }));
 };
 
 const devFormat = () => {
