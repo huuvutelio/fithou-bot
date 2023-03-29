@@ -9,6 +9,6 @@ COPY --chown=chrome package*.json ./
 RUN npm install -f
 COPY --chown=chrome . ./
 
+RUN [ "echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p" ]
 ENTRYPOINT ["tini", "--"]
-
 CMD ["npm", "run", "start-ts"]
