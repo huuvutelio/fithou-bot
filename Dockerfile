@@ -7,5 +7,4 @@ RUN npm cache clean --force
 
 RUN npm install -f
 COPY . .
-RUN npm run build
-CMD ["npm", "start"]
+CMD ["npm", "run", "start-ts"]

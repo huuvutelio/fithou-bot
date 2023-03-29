@@ -16,7 +16,6 @@
     "start": "cross-env NODE_PATH=./dist NODE_ENV=prd node dist/server.js",
     "start-ts": "NODE_PATH=./src nodemon src/server.ts",
     "start-dev": "NODE_ENV=dev npm run start",
-    "start-stg": "NODE_ENV=stg npm run start",
     "start-prd": "NODE_ENV=prd npm run start"
   },
   "pre-commit": [
