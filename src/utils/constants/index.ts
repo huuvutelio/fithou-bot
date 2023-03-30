@@ -53,10 +53,17 @@ const NOTI_IMAGE = {
   off: 'https://cdn-icons-png.flaticon.com/128/1827/1827310.png',
 };
 
-const calculateTheNumberOfDaysBetweenTwoDates = (nextDate: Date, prevDate: Date) => {
-  const diffTime = Math.abs(nextDate.getTime() - prevDate.getTime());
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  return diffDays;
+const calculateTheNumberOfDaysBetweenTwoDates = (examDate: Date, today: Date) => {
+  const inputYear = examDate.getFullYear();
+  const inputMonth = examDate.getMonth();
+  const inputDay = examDate.getDate();
+  const todayYear = today.getFullYear();
+  const todayMonth = today.getMonth();
+  const todayDay = today.getDate();
+
+  if (inputMonth === todayMonth && inputYear === todayYear) {
+    return inputDay - todayDay;
+  }
 };
 
 export {

@@ -19,7 +19,7 @@ const prodFormat = () => {
 
 const devFormat = () => {
   const formatMessage = (info: any) =>
-    `${info.level} ${info.message}${info.meta ? ` ${JSON.stringify(info.meta)}` : ''}`;
+    `${info.level} ${info.message}${info.meta ? `${JSON.stringify(info.meta)}` : ''}`;
   const formatError = (info: any) => `${info.level} ${info.message}\n\n${info.stack}\n`;
 
   const fmt = (info: any) => (info instanceof Error ? formatError(info) : formatMessage(info));

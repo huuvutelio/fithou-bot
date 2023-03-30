@@ -6,6 +6,7 @@ import ctmsRouter from './ctms';
 import schoolScheduleRouter from './schoolSchedule';
 import sendQuickRepliesRouter from './sendQuickReplies';
 import userRouter from './users';
+import examRouter from './exam';
 
 const router = Router();
 
@@ -16,5 +17,6 @@ router.use('/ctms', ctmsRouter);
 router.use('/school-schedule', schoolScheduleRouter);
 router.use('/send-quick-replies', sendQuickRepliesRouter);
 router.use('/users', userRouter);
+router.use('/exam', examRouter);
 
 export default router;

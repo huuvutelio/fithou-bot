@@ -1,9 +1,9 @@
 import { model, Model, Schema } from 'mongoose';
 
 import { MODELS } from 'utils/constants/models';
-import ExamDay from '../types/ExamDay';
+import ExamDayType from 'models/types/ExamDay';
 
-const ExamDaySchema = new Schema<ExamDay>(
+const ExamDaySchema = new Schema<ExamDayType>(
   {
     username: { type: String, required: true },
     dataSent: [
@@ -23,5 +23,5 @@ const ExamDaySchema = new Schema<ExamDay>(
 
 ExamDaySchema.index({ username: 1 });
 
-const ExamDayModel: Model<ExamDay> = model<ExamDay>(MODELS.examDay, ExamDaySchema, MODELS.examDay);
+const ExamDayModel: Model<ExamDayType> = model<ExamDayType>(MODELS.examDay, ExamDaySchema, MODELS.examDay);
 export default ExamDayModel;

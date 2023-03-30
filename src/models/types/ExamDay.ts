@@ -2,7 +2,7 @@ import { Document } from 'mongoose';
 
 import { ExamType } from 'types';
 
-export default interface User extends Document {
+export default interface ExamDayType extends Document {
   username: string;
   dataSent: ExamType[];
 }
