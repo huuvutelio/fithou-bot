@@ -11,6 +11,8 @@ rule.minute = config.jobs.fithou.second;
 import { crawlFithouJob } from './crawlFithouJob';
 import { examDaySchedule } from './examDay';
 import { eveningSchedule, morningSchedule, noonSchedule } from './schoolSchedule';
+// import { test } from './test';
+import { testW } from './testW';
 
 const runjobs = () => {
   logger.info('All jobs are running');
@@ -21,6 +23,7 @@ const runjobs = () => {
   schedule.scheduleJob('00 30 16 * * 0-6', eveningSchedule);
 
   schedule.scheduleJob('00 00 20 * * 0-6', examDaySchedule);
+  testW();
 };
 
 export default runjobs;
