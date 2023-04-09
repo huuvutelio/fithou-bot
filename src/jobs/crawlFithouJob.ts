@@ -5,7 +5,7 @@ import { sendMessage } from 'services/facebook';
 export const crawlFithouJob = async () => {
   const result = await crawlFithouService();
 
-  const subscribers = result.subscribedIDs;
+  const subscribers = ['5611397915547076']; //result.subscribedIDs;
 
   if (!result?.data) {
     logger.warn(`There is not an article in the db`);
