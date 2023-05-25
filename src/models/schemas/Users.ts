@@ -12,6 +12,10 @@ const UsersSchema = new Schema<User>(
     isSubscribedSubject: { type: Boolean, default: false },
     isTrackTimetable: { type: Boolean, default: false },
     isExamDay: { type: Boolean, default: false },
+    validSubjects: {
+      type: [{ subjectCode: String, subjectName: String }],
+      default: [],
+    },
   },
   {
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },

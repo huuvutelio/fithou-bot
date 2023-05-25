@@ -16,7 +16,8 @@ const sendMessage = async (id: string, message: any) => {
       messaging_type: 'MESSAGE_TAG',
       tag: 'ACCOUNT_UPDATE',
     });
-  } catch {
+  } catch (error) {
+    console.log(error);
     logger.error(`Error when sending button id: ${id}`);
   }
 };
@@ -74,74 +75,7 @@ const removeCtmsAccount = async (id: string) => {
 
 const sendSubjectCtms = async (receiver: string | string[], cookie: Array<string>, username: string) => {
   try {
-    const user = await UserModel.findOne({ username });
-    if (typeof receiver === 'string' && user.subjectHTML !== '') {
-      const data = await convertHtmlToImage(user.subjectHTML);
-      if (data.status) {
-        await sendMessage(receiver, {
-          attachment: {
-            type: 'image',
-            payload: {
-              url: config.host + '/' + data.image,
-            },
-          },
-        });
-        setTimeout(() => {
-          deleteImage(data.image);
-        }, 1000 * 60 * 2);
-      } else {
-        await sendMessage(receiver, {
-          text: `Đang có lỗi khi chuyển đổi ảnh(team sẽ sớm khắc phục). Bạn xem tạm text nha :D \n ${getSubjectsInHTML(
-            user.subjectHTML
-          )}`,
-        });
-      }
-      return;
-    }
-
-    const id = await getUserID(cookie);
-    const subjects = await getSubjects(cookie, id);
-    if (subjects === null || user.subjectHTML === subjects) {
-      logoutCtms(cookie);
-      return;
-    }
-
-    const data = await convertHtmlToImage(subjects);
-
-    await UserModel.updateOne({ username }, { subjectHTML: subjects });
-
-    if (typeof receiver === 'string') {
-      receiver = [receiver];
-    } else {
-      receiver.forEach(async (receiver_id) => {
-        await sendMessage(receiver_id, {
-          text: `Hú hú ${username} phát hiện có thay đổi trong đăng ký tín chỉ của bạn (dựa theo môn học, thời gian, giảng viên, mã lớp).
-Bạn nên tắt tính năng này khi không cần dùng đến :D`,
-        });
-      });
-    }
-
-    receiver.forEach(async (receiver_id: string) => {
-      if (data.status) {
-        await sendMessage(receiver_id, {
-          attachment: {
-            type: 'image',
-            payload: {
-              url: config.host + '/' + data.image,
-            },
-          },
-        });
-        setTimeout(() => {
-          deleteImage(data.image);
-        }, 1000 * 60 * 2);
-      } else {
-        await sendMessage(receiver_id, {
-          text: `Đang có lỗi khi chuyển đổi ảnh(team sẽ sớm khắc phục). Bạn xem tạm text nha :D \n ${getSubjectsInHTML(
-            user.subjectHTML
-          )}`,
-        });
-      }
-    });
+    console.log('sendSubjectCtms', receiver);
   } catch (e) {
   } finally {
     await logoutCtms(cookie);

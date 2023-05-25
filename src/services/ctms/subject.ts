@@ -33,26 +33,24 @@ const getSubjects = async (cookie: Array<string>, userId: string) => {
   return subjects.html();
 };
 
-const getSubjectsInHTML = (html: string): string => {
+const removeDuplicateSpace = (street: string): string => {
+  return street.replace(/\s+/g, ' ').trim();
+};
+
+const getSubjectsInHTML = (html: string): any[] => {
   const $ = cheerio.load(html);
   const subjects = $('tr');
-  let result = '';
+  let result = [];
   for (let i = 1; i < subjects.length; i++) {
     const subject = subjects[i];
-    const subjectCode = $(subject).find('td').eq(1).text().trim();
-    const subjectName = $(subject)
-      .find('td')
-      .eq(2)
-      .text()
-      .trim()
-      .split('\n')
-      .map((x) => x.trim())
-      .join('\n');
-    const subjectTime = $(subject).find('td').eq(7).text().trim();
-    result += `Mã lớp: ${subjectCode}
-Tên lớp: ${subjectName}
-Lịch học: ${subjectTime}
-------------------\n`;
+    const status = $(subject).find('td').eq(0).text().trim();
+    const subjectCode = removeDuplicateSpace($(subject).find('td').eq(1).text().trim());
+    const subjectName = removeDuplicateSpace($(subject).find('td').eq(2).text().trim()).replace(/\n/g, ' - ');
+    result.push({
+      subjectCode,
+      subjectName,
+      status: !(status.includes('Hết chỉ tiêu') || status.includes('Hết hạn ĐK')),
+    });
   }
   return result;
 };

@@ -1,5 +1,9 @@
 import { Document } from 'mongoose';
 
+interface Subject {
+  subjectCode: string;
+  subjectName: string;
+}
 export default interface User extends Document {
   username: string;
   password: string;
@@ -8,4 +12,5 @@ export default interface User extends Document {
   isSubscribedSubject: boolean;
   isTrackTimetable: boolean;
   isExamDay: boolean;
+  validSubjects: Subject[];
 }

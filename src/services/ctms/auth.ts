@@ -48,6 +48,7 @@ const loginCtms = async (username: string, password: string) => {
 
     const response = await axios(configOfServer);
     const dom = cheerio.load(response.data)('#LeftCol_UserLogin1_lblMess');
+    console.log('login: ' + username, response.headers['set-cookie']);
 
     return {
       cookie: response.headers['set-cookie'],
@@ -81,7 +82,7 @@ const logoutCtms = async (cookie: Array<string>) => {
       }
     );
 
-    logger.info('logout ctms success');
+    logger.info('logout ctms success 2' + JSON.stringify(cookie));
   } catch (e) {
     console.log('logout errr:', e.message);
   }

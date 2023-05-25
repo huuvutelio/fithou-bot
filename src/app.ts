@@ -72,6 +72,7 @@ export const listen = async () => {
     logger.info(`=================================`);
     logger.info(`🚀 ⚡️[server]: Server is running at http://localhost:${config.port}`);
     logger.info(`=================================`);
+    console.log(`🚀 ⚡️[server]: Server is running at http://localhost:${JSON.stringify(config)}`);
   });
 };
 
